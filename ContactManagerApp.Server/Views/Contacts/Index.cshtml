@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Contact>
+
+Put your CSV file and then click on the Upload CSV button.
+<form enctype="multipart/form-data" asp-action="Upload" method="post">
+    <input type="file" name="file" />
+    <button type="submit">Upload CSV</button>
+</form>
+
+<input type="text" id="searchInput" placeholder="Search contacts..." />
+
+<!-- Contacts Table -->
+<table id="contactsTable">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th>Married</th>
+        <th>Phone</th>
+        <th>Salary</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var contact in Model)
+    {
+    <tr data-id="@contact.Id">
+        <td contenteditable="true">@contact.Name</td>
+        <td contenteditable="true">@contact.DateOfBirth.ToShortDateString()</td>
+        <td contenteditable="true">@contact.Married</td>
+        <td contenteditable="true">@contact.Phone</td>
+        <td contenteditable="true">@contact.Salary</td>
+        <td>
+            <button class="save-btn" data-id="@contact.Id">Save</button>
+            <button class="delete-btn" data-id="@contact.Id">Delete</button>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>
